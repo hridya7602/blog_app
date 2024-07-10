@@ -6,7 +6,7 @@ import { FaMoon } from 'react-icons/fa';
 import Home from "../pages/Home";
 
 const Header = () => {
-  const location = useLocation(); // Get current location
+  const path = useLocation().pathname; // Get current location
 
   return (
     <Navbar className='border-b-2'>
@@ -49,16 +49,16 @@ const Header = () => {
             </Button>
           </Link>
       </div>
-
+      <Navbar.Toggle />
       {/* Navbar.Collapse and Navbar.Link for collapsible menu */}
       <Navbar.Collapse>
-        <Navbar.Link active={location.pathname === '/'} as='div'>
+        <Navbar.Link active={path === '/'} as={'div'}>
           <Link to='/'>Home</Link>
         </Navbar.Link>
-        <Navbar.Link active={location.pathname === '/about'} as='div'>
+        <Navbar.Link active={path === '/about'} as={'div'}>
           <Link to='/about'>About</Link>
         </Navbar.Link>
-        <Navbar.Link active={location.pathname === '/projects'} as='div'>
+        <Navbar.Link active={path === '/projects'} as={'div'}>
           <Link to='/projects'>Projects</Link>
         </Navbar.Link>
       </Navbar.Collapse>
