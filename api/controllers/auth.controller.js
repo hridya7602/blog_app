@@ -1,4 +1,5 @@
 import User from '../models/user.model.js'; // Ensure the correct file path and extension
+import bcyrptjs from 'bcryptjs';
 
 export const signup = async (req, res) => {
     const { username, email, password } = req.body;
@@ -6,6 +7,8 @@ export const signup = async (req, res) => {
     if (!username || !email || !password || username === '' || email === '' || password === '') {
         return res.status(400).json({ message: 'All fields are required' });
     }
+
+    const  hashedPassword= bcyrptjs.hashSync(password,10);
 
     try {
         // Check if the username already exists
@@ -17,7 +20,7 @@ export const signup = async (req, res) => {
         const newUser = new User({
             username,
             email,
-            password,
+            password:hashedPassword,
         });
 
         await newUser.save();
